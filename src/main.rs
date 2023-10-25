@@ -68,4 +68,44 @@ fn reverse_test() {
     let n: u32 = 43261596;
     assert_eq!(reverse_bits(n), 964176192);
 }
+
+//==========================================================================
+fn add_digits(num: i32) -> i32 {
+    let mut n = num;
+    let mut tmp = 0;
+    while n > 0 {
+        tmp += n % 10;
+        n = n / 10;
+    }
+    if tmp < 10 {
+        return tmp;
+    } else {
+        return add_digits(tmp);
+    }
+}
     
+#[test]
+fn add_digits_test() {
+    let n: i32 = 38;
+    assert_eq!(add_digits(n), 2);
+}
+
+// //==========================================================================
+fn is_palindrome(x: i32) -> bool {
+    if x < 0 {
+        return false;
+    }
+    let mut reversed = 0;
+    let mut num = x;
+    while num > 0 {
+        reversed = reversed * 10 + num % 10;
+        num /= 10;
+    }
+    x == reversed      
+}
+
+#[test]
+fn is_palindrome_test() {
+    assert_eq!(is_palindrome(121), true);
+    assert_eq!(is_palindrome(-121), false);
+}
